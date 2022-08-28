@@ -113,6 +113,7 @@ ancients.onclick = function (event) {
   if (!ancients.contains(ancient)) return
 
   selectAncient(ancient)
+  difficultyContainer.style.display = 'flex'
 }
 
 function selectAncient(ancient) {
