@@ -2,13 +2,21 @@ import ancientsData from '../data/ancients.js'
 
 import deck from '../data/mythicCards/index.js'
 
+let greenCardsDataAll = deck.greenCardsData
+let brownCardsDataAll = deck.brownCardsData
+let blueCardsDataAll = deck.blueCardsData
+
+let greenCardsDataFiltred
+let brownCardsDataFiltred
+let blueCardsDataFiltred
+
 let selectedAncient
 
 const ancients = document.querySelector('.ancient-container')
 const currentState = document.querySelector('.current-state')
 
-// Event delegation
-// Select ancient
+const shuffleButton = document.querySelector('.shuffle-button')
+let gameDeck
 
 let ancientNumber
 let greenCardsCounter
@@ -26,6 +34,12 @@ const secondBlue = document.querySelector('.second > .blue')
 const thirdGreen = document.querySelector('.third > .green')
 const thirdBrown = document.querySelector('.third > .brown')
 const thirdBlue = document.querySelector('.third > .blue')
+
+let selectedDifficulty
+const difficultyContainer = document.querySelector('.difficulty-container')
+
+// Event delegation
+// Select ancient
 
 ancients.onclick = function (event) {
   let ancient = event.target.closest('.ancient-card')
@@ -111,9 +125,6 @@ function selectAncient(ancient) {
 
 // Select difficulty
 
-let selectedDifficulty
-const difficultyContainer = document.querySelector('.difficulty-container')
-
 difficultyContainer.onclick = function (event) {
   let difficulty = event.target.closest('.difficulty')
 
@@ -133,12 +144,39 @@ function selectDifficulty(difficulty) {
 
   difficultyContainer.style.display = 'none'
   shuffleButton.style.display = 'block'
+
+  if (selectedDifficulty.classList.contains('easy')) {
+    greenCardsDataFiltred = greenCardsDataAll.filter(function (el) {
+      return el.difficulty != 'hard'
+    })
+
+    brownCardsDataFiltred = brownCardsDataAll.filter(function (el) {
+      return el.difficulty != 'hard'
+    })
+
+    blueCardsDataFiltred = blueCardsDataAll.filter(function (el) {
+      return el.difficulty != 'hard'
+    })
+  } else if (selectedDifficulty.classList.contains('medium')) {
+    greenCardsDataFiltred = greenCardsDataAll
+    brownCardsDataFiltred = brownCardsDataAll
+    blueCardsDataFiltred = blueCardsDataAll
+  }
+
+  if (selectedDifficulty.classList.contains('high')) {
+    greenCardsDataFiltred = greenCardsDataAll.filter(function (el) {
+      return el.difficulty != 'easy'
+    })
+
+    brownCardsDataFiltred = brownCardsDataAll.filter(function (el) {
+      return el.difficulty != 'easy'
+    })
+
+    blueCardsDataFiltred = blueCardsDataAll.filter(function (el) {
+      return el.difficulty != 'easy'
+    })
+  }
 }
-
-/////////
-
-const shuffleButton = document.querySelector('.shuffle-button')
-let gameDeck
 
 // get random number
 function getRandomNum(min, max) {
@@ -159,19 +197,19 @@ function shuffleDeck() {
   //get deck
   function getRandomGreen() {
     while (greenDeck.size < greenCardsCounter) {
-      greenDeck.add(deck.greenCardsData[getRandomNum(0, 17)])
+      greenDeck.add(greenCardsDataFiltred[getRandomNum(0, greenCardsDataFiltred.length - 1)])
     }
   }
 
   function getRandomBrown() {
     while (brownDeck.size < brownCardsCounter) {
-      brownDeck.add(deck.brownCardsData[getRandomNum(0, 20)])
+      brownDeck.add(brownCardsDataFiltred[getRandomNum(0, brownCardsDataFiltred.length - 1)])
     }
   }
 
   function getRandomBlue() {
     while (blueDeck.size < blueCardsCounter) {
-      blueDeck.add(deck.blueCardsData[getRandomNum(0, 11)])
+      blueDeck.add(blueCardsDataFiltred[getRandomNum(0, blueCardsDataFiltred.length - 1)])
     }
   }
 
@@ -201,7 +239,6 @@ function shuffleDeck() {
       blueArr.shift()
     }
     shuffle(firstStageDeck)
-    // console.log(firstStageDeck)
   }
   function getSecondStageDeck() {
     for (let i = 0; i < ancientsData[ancientNumber].secondStage.greenCards; i++) {
@@ -279,7 +316,6 @@ function deckClick() {
   if (gameDeck.length > 0) {
     imgUrl = gameDeck[0].cardFace
     color = gameDeck[0].color
-    console.log(`color ${color}`)
 
     deckFace.style.backgroundImage = `url('/assets/MythicCards/${color}/${imgUrl}')`
 
