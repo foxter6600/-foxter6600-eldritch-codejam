@@ -242,8 +242,6 @@ function shuffleDeck() {
   let greenArr = Array.from(greenDeck)
   let brownArr = Array.from(brownDeck)
   let blueArr = Array.from(blueDeck)
-  console.log(`grA ${greenArr}`)
-  console.log(greenDeck)
 
   getFirstStageDeck()
   getSecondStageDeck()
@@ -263,7 +261,7 @@ function shuffleDeck() {
 
   deckBack.style.display = 'block'
   gameDeck = [...firstStageDeck, ...secondStageDeck, ...thirdStageDeck]
-  console.log(gameDeck)
+
   shuffleButton.style.display = 'none'
   currentState.style.display = 'flex'
 }
@@ -278,7 +276,7 @@ function deckClick() {
   let imgUrl
   let color
 
-  try {
+  if (gameDeck.length > 0) {
     imgUrl = gameDeck[0].cardFace
     color = gameDeck[0].color
     console.log(`color ${color}`)
@@ -314,8 +312,9 @@ function deckClick() {
     }
 
     gameDeck.shift()
-  } catch {
-    deckBack.style.display = 'none'
+    if (gameDeck.length == 0) {
+      deckBack.style.display = 'none'
+    }
   }
 }
 
