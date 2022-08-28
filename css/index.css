@@ -1,0 +1,136 @@
+body {
+  font-size: 24px;
+}
+
+.wrapper {
+  background-image: url(..//assets/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.ancient-container {
+  display: flex;
+  justify-content: space-around;
+  height: 45%;
+}
+
+.ancient-card {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 400px;
+  width: 320px;
+}
+
+.ancient-card.active {
+  border: 2px solid red;
+}
+
+.difficulty-container {
+  display: none;
+  justify-content: center;
+  gap: 40px;
+}
+
+.difficulty.active {
+  background-color: red;
+}
+
+.difficulty {
+  border: 2px solid rgb(224, 185, 11);
+  box-sizing: border-box;
+  color: rgb(224, 185, 11);
+  cursor: pointer;
+  padding: 5px;
+  text-align: center;
+}
+
+.shuffle {
+  display: flex;
+  height: 10%;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.shuffle-button {
+  background-color: red;
+  border: 2px solid purple;
+  color: rgb(224, 185, 11);
+  cursor: pointer;
+  padding: 5px;
+  width: 10%;
+  text-align: center;
+  display: none;
+}
+
+.deck-container {
+  height: 30%;
+  align-items: center;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+  min-width: 30%;
+}
+
+.deck {
+  display: none;
+  background-size: cover;
+  height: 190px;
+  width: 130px;
+  cursor: pointer;
+}
+
+.last-card {
+  background-size: cover;
+  height: 190px;
+  width: 130px;
+}
+
+.current-state {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stage-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-text {
+  color: rgb(224, 185, 11);
+  border: 2px solid rgb(224, 185, 11);
+  text-align: center;
+}
+
+.card-block {
+  display: flex;
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-of-cards {
+  display: flex;
+}
+
+.green {
+  background-color: green;
+}
+
+.brown {
+  background-color: brown;
+}
+
+.blue {
+  background-color: blue;
+}
